@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'io.quarkus'
+    id "org.owasp.dependencycheck" version "6.5.3"
 }
 
 repositories {
@@ -33,3 +34,7 @@ compileJava {
 compileTestJava {
     options.encoding = 'UTF-8'
 }
+
+apply plugin: 'org.owasp.dependencycheck'
+
+
