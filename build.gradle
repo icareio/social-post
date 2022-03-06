@@ -1,7 +1,8 @@
 plugins {
     id 'java'
     id 'io.quarkus'
-    id "org.owasp.dependencycheck" version "6.5.3"
+    id 'org.owasp.dependencycheck' version '6.5.3'
+    id 'jacoco'
 }
 
 repositories {
@@ -39,6 +40,18 @@ compileTestJava {
 test {
     useJUnitPlatform()
     maxHeapSize = '1G'
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+
+    reports {
+        xml.enabled false
+        csv.enabled true
+        html.destination file("${buildDir}/reports/jacoco/Html")
+        csv.destination file("${buildDir}/reports/jacoco/jacoco.csv")
+    }
 }
 
 apply plugin: 'org.owasp.dependencycheck'
