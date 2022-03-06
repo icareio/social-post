@@ -16,6 +16,7 @@ dependencies {
     implementation 'io.quarkus:quarkus-arc'
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
+    testImplementation 'org.assertj:assertj-core:3.22.0'
 }
 
 group 'org.icareio.social.post'
@@ -33,6 +34,11 @@ compileJava {
 
 compileTestJava {
     options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
+    maxHeapSize = '1G'
 }
 
 apply plugin: 'org.owasp.dependencycheck'
